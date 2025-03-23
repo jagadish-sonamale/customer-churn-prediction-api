@@ -119,13 +119,13 @@ minikube service churn-api-service
 
 ## 🧑‍🎓 Model Info
 
-- Algorithm: *e.g., Logistic Regression / Random Forest / ANN*
+- Algorithm: *e.g., ANN
 - Training dataset: *Provide name or description*
 - Metrics: *Accuracy, Precision, Recall, F1-score*
 
 ---
 
-## 🛡️ Future Improvements
+## 🛡️ Future Improvements(TODO)
 
 - ✅ Add CI/CD with GitHub Actions
 - ✅ Load testing with Locust
