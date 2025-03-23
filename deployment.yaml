@@ -1,0 +1,30 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: customer-churn-prediction-api
+  labels:
+    app: customer-churn-prediction-api
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: customer-churn-prediction-api
+  template:
+    metadata:
+      labels:
+        app: customer-churn-prediction-api
+    spec:
+      containers:
+      - name: customer-churn-prediction-api
+        image: customer-churn-prediction-api:latest
+        ports:
+        - containerPort: 8000
+        imagePullPolicy: Always
+        resources:
+          limits:
+            memory: "512Mi"
+            cpu: "500m"
+          requests:
+            memory: "256Mi"
+            cpu: "250m"
+
