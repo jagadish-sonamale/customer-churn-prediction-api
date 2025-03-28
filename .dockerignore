@@ -2,3 +2,6 @@ __pycache__/
 *.pyc
 *.pkl
 .env
+.gitignore
+notebooks/
+.requirements_local.txt

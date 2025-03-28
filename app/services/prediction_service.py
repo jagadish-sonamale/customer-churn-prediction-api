@@ -1,17 +1,16 @@
 import os
 import pickle
 import numpy as np
-import tensorflow as tf
-from sklearn.preprocessing import StandardScaler, LabelEncoder, OneHotEncoder
 import pandas as pd
 from app.schemas.request_model import PredictionRequest
-
+import tflite_runtime.interpreter as tflite
 
 # Get absolute path of the file
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 
 ## Load Pre-Trained Model & Preprocessing Objects 
-model = tf.keras.models.load_model('app/models/model.h5')
+##model = tf.keras.models.load_model('app/models/model.h5')
+interpreter = tflite.Interpreter(model_path="app/models/model.tflite")
 
 with open(os.path.join(BASE_DIR, '../utils/label_encoder_gender.pkl'), 'rb') as file:
     label_encoder_gender = pickle.load(file)
@@ -46,8 +45,16 @@ def churn_predict(data: PredictionRequest):
     })
     
     input_data = pd.concat([input_data, geo_encoded_df], axis=1)
-    input_scaled = scaler.transform(input_data)
-    print(input_data.columns)
-    prediction = model.predict(input_scaled)[0][0]
+    input_scaled = scaler.transform(input_data).astype(np.float32)
+
+        # TFLite inference
+    interpreter.allocate_tensors()
+    input_details = interpreter.get_input_details()
+    output_details = interpreter.get_output_details()
+
+    interpreter.set_tensor(input_details[0]['index'], input_scaled)
+    interpreter.invoke()
+
+    prediction = interpreter.get_tensor(output_details[0]['index'])[0][0]
     
     return round(float(prediction), 2)
