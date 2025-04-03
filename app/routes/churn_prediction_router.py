@@ -1,12 +1,13 @@
+# app/routes/churn_prediction_router.py
+
 from fastapi import APIRouter
-from app.services.prediction_service import churn_predict
-from app.schemas.request_model import PredictionRequest
+from app.schemas.request_model import ChurnRequest
+from app.models.predictor import preprocess_input, run_inference
 
 router = APIRouter()
 
 @router.post("/predict")
-def predict(data: PredictionRequest):
-    prediction = churn_predict(data)
-    if prediction >= 0.5:
-        return {"prediction": "1"}
-    return {"prediction": "0"} 
+def predict_churn(data: ChurnRequest):
+    input_scaled = preprocess_input(data)
+    prediction = run_inference(input_scaled)
+    return {"churn_probability": prediction}

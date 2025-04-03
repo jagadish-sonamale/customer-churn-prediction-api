@@ -1,6 +1,6 @@
 from pydantic import BaseModel
 
-class PredictionRequest(BaseModel):
+class ChurnRequest(BaseModel):
     CreditScore: int
     Geography: str
     Gender: str
@@ -10,4 +10,4 @@ class PredictionRequest(BaseModel):
     NumOfProducts: int
     HasCrCard: int
     IsActiveMember: int
-    EstimatedSalary: float
+    EstimatedSalary: float 
