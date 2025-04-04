@@ -49,11 +49,11 @@ docker-push:
 
 # Apply all Kubernetes manifests
 k8s-deploy:
-	kubectl apply -f manifests/
+	kubectl apply -f k8s/
 
 # Delete all Kubernetes resources
 k8s-delete:
-	kubectl delete -f manifests/
+	kubectl delete -f k8s/
 
 # Check status of pods and services
 k8s-status:

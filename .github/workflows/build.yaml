@@ -2,7 +2,7 @@ name: Build and Push to Docker Hub
 
 on:
   push:
-    branches: [ main ]  # or "master" or any branch you prefer
+    branches: [ main ]
 
 jobs:
   build:
@@ -23,3 +23,14 @@ jobs:
 
     - name: Push Docker image
       run: docker push jagadish9084/customer-churn-prediction-api:latest
+
+    - name: Zip the manifests
+      run: |
+        zip -r k8s-manifests.zip k8s/
+
+    - name: Upload artifact
+      uses: actions/upload-artifact@v3
+      with:
+        name: k8s-manifests
+        path: k8s-manifests.zip
+        retention-days: 7
