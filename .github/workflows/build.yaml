@@ -34,7 +34,7 @@ jobs:
 
       - name: Replace image tag placeholder
         run: |
-          sed -i "s|__IMAGE_TAG__|${IMAGE_TAG}|g" k8s/deployment.yaml
+          sed -i "s|__IMAGE_TAG__|${VERSION}|g" k8s/deployment.yaml
 
       - name: Zip Kubernetes manifests
         run: |
