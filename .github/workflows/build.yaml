@@ -29,8 +29,11 @@ jobs:
         zip -r k8s-manifests.zip k8s/
 
     - name: Upload artifact
-      uses: actions/upload-artifact@v2.2.4
+      uses: actions/upload-artifact@v3
       with:
         name: k8s-manifests
         path: k8s-manifests.zip
         retention-days: 7
+
+    - name: Ensure zip file exists
+      run: ls -lh k8s-manifests.zip
