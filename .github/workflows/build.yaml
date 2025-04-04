@@ -32,6 +32,10 @@ jobs:
           docker push jagadish9084/customer-churn-prediction-api:${VERSION}
           docker push jagadish9084/customer-churn-prediction-api:latest
 
+      - name: Replace image tag placeholder
+        run: |
+          sed -i "s|__IMAGE_TAG__|${IMAGE_TAG}|g" k8s/deployment.yaml
+
       - name: Zip Kubernetes manifests
         run: |
           cd k8s
