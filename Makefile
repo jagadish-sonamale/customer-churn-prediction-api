@@ -4,8 +4,11 @@ ENV_NAME=churn-env
 
 .PHONY: install run train test lint docker-build docker-run clean
 
-install:
-	conda run -n $(ENV_NAME) pip install -r requirements_local.txt
+install-dev:
+	conda run -n $(ENV_NAME) pip install -r requirements/dev.txt
+
+install-prod:
+	conda run -n $(ENV_NAME) pip install -r requirements/prod.txt
 
 run:
 	conda run -n $(ENV_NAME) uvicorn app.main:app --reload
