@@ -32,7 +32,6 @@ jobs:
           docker push jagadish9084/customer-churn-prediction-api:${VERSION}
           docker push jagadish9084/customer-churn-prediction-api:latest
 
-
       - name: Zip Kubernetes manifests
         run: |
           cd k8s
