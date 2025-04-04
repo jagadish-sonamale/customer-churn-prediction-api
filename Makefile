@@ -5,7 +5,7 @@ ENV_NAME=churn-env
 .PHONY: install run train test lint docker-build docker-run clean
 
 install:
-	conda run -n $(ENV_NAME) pip install -r requirements.txt
+	conda run -n $(ENV_NAME) pip install -r requirements_local.txt
 
 run:
 	conda run -n $(ENV_NAME) uvicorn app.main:app --reload
@@ -19,6 +19,10 @@ run:
 lint:
 	conda run -n $(ENV_NAME) black app/ --check
 	conda run -n $(ENV_NAME) isort app/ --check-only
+
+format:
+	conda run -n $(ENV_NAME) black app/
+	conda run -n $(ENV_NAME) isort app/
 
 clean:
 	find . -type d -name "__pycache__" -exec rm -r {} +

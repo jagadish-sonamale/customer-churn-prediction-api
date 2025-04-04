@@ -1,5 +1,6 @@
 from pydantic import BaseModel
 
+
 class ChurnRequest(BaseModel):
     CreditScore: int
     Geography: str
@@ -10,4 +11,4 @@ class ChurnRequest(BaseModel):
     NumOfProducts: int
     HasCrCard: int
     IsActiveMember: int
-    EstimatedSalary: float 
+    EstimatedSalary: float
