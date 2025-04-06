@@ -37,9 +37,7 @@ jobs:
           sed -i "s|__IMAGE_TAG__|${VERSION}|g" k8s/deployment.yaml
 
       - name: Zip Kubernetes manifests
-        run: |
-          cd k8s
-          zip -r ../k8s-manifests-${VERSION}.zip .
+        run: zip -r k8s-manifests-${VERSION}.zip k8s/*
 
       - name: Upload Kubernetes manifests artifact
         uses: actions/upload-artifact@v4
