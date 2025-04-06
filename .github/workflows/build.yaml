@@ -55,10 +55,13 @@ jobs:
           chmod 600 ~/.ssh/id_rsa
           ssh-keyscan ${{ secrets.EC2_HOST }} >> ~/.ssh/known_hosts   
 
-      - name: Deploy over SSH
+      - name: Deploy via SSH
         run: |
-          ssh ${{ secrets.EC2_USER }}@${{ secrets.EC2_HOST }} << 'EOF'
-            echo "✅ Connected to EC2"
-
-            echo "🚀 Deployed!"
-          EOF          
+          ssh -o StrictHostKeyChecking=no ${{ secrets.EC2_USER }}@${{ secrets.EC2_HOST }} <<EOF
+          echo "✅ Connected to EC2"
+          # cd ~/customer-churn-api || git clone https://github.com/<your-username>/<your-repo>.git ~/customer-churn-api && cd ~/customer-churn-api
+          # git pull origin main
+          # docker compose down
+          # docker compose up -d --build
+          echo "🚀 Deployed!"
+          EOF
