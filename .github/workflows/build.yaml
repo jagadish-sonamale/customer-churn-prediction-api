@@ -38,8 +38,8 @@ jobs:
 
       - name: Zip Kubernetes manifests
         run: |
-          mkdir -p dist
-          zip -r dist/k8s-manifests-${VERSION}.zip k8s -x "k8s/*.zip"
+          cd k8s
+          zip -r ../k8s-manifests-${VERSION}.zip .
 
       - name: Upload Kubernetes manifests artifact
         uses: actions/upload-artifact@v4
